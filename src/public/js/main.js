@@ -1,5 +1,21 @@
 // vikas was here!
+
+// requests
+
 const http = new XMLHttpRequest();
+
+function post(review = {}) {
+  http.open('POST', '/api/review/create');
+  http.setRequestHeader("Content-type", "application/json; charset=utf-8");
+  http.send(JSON.stringify(review));
+}
+
+function request(query = '') {
+  http.open('GET', `/api/reviews${query}`);
+  http.send();
+}
+
+// ui
 
 function updateTable() {
   const response = JSON.parse(http.responseText);
@@ -10,21 +26,6 @@ function updateTable() {
     request();
     return;
   }
-
-  // if (!(response instanceof Array)) {
-  //   const row = document.createElement('tr');
-  //
-  //   Object.keys(response).forEach(attribute => {
-  //     if (['_id', '__v'].includes(attribute)) { return; }
-  //
-  //     const data = document.createElement('td');
-  //     data.textContent = response[attribute];
-  //     row.appendChild(data);
-  //   });
-  //
-  //   oldTable.appendChild(row);
-  //   return;
-  // }
 
   response.forEach(review => {
     const row = document.createElement('tr');
@@ -43,12 +44,6 @@ function updateTable() {
   oldTable.parentNode.replaceChild(newTable, oldTable);
 }
 
-function post(review = {}) {
-  http.open('POST', '/api/review/create');
-  http.setRequestHeader("Content-type", "application/json; charset=utf-8");
-  http.send(JSON.stringify(review));
-}
-
 function add(evt) {
   evt.preventDefault();
   const name = document.querySelector('#name').value;
@@ -64,17 +59,14 @@ function add(evt) {
   });
 }
 
-function request(query = '') {
-  http.open('GET', `/api/reviews${query}`);
-  http.send();
-}
-
 function filter(evt) {
   evt.preventDefault();
   const semester = document.querySelector('#filterSemester').value;
   const year = document.querySelector('#filterYear').value;
   request(`?semester=${semester}&year=${year}`);
 }
+
+// init
 
 function listen() {
   const filterButton = document.querySelector('#filterBtn');
