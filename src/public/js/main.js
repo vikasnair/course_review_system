@@ -7,19 +7,24 @@ function updateTable() {
   const newTable = document.createElement('tbody');
 
   if (!(response instanceof Array)) {
-    const row = document.createElement('tr');
-
-    Object.keys(response).forEach(attribute => {
-      if (['_id', '__v'].includes(attribute)) { return; }
-
-      const data = document.createElement('td');
-      data.textContent = response[attribute];
-      row.appendChild(data);
-    });
-
-    oldTable.appendChild(row);
+    request();
     return;
   }
+
+  // if (!(response instanceof Array)) {
+  //   const row = document.createElement('tr');
+  //
+  //   Object.keys(response).forEach(attribute => {
+  //     if (['_id', '__v'].includes(attribute)) { return; }
+  //
+  //     const data = document.createElement('td');
+  //     data.textContent = response[attribute];
+  //     row.appendChild(data);
+  //   });
+  //
+  //   oldTable.appendChild(row);
+  //   return;
+  // }
 
   response.forEach(review => {
     const row = document.createElement('tr');
