@@ -6,7 +6,7 @@ const http = new XMLHttpRequest();
 
 function post(review = {}) {
   http.open('POST', '/api/review/create');
-  http.setRequestHeader("Content-type", "application/json; charset=utf-8");
+  http.setRequestHeader('Content-type', 'application/json; charset=utf-8');
   http.send(JSON.stringify(review));
 }
 
@@ -82,4 +82,4 @@ function main() {
   request();
 }
 
-document.addEventListener("DOMContentLoaded", main);
+document.addEventListener('DOMContentLoaded', main);
